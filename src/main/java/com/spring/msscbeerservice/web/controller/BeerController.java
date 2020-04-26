@@ -4,21 +4,21 @@ import com.spring.msscbeerservice.web.model.BeerDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.function.ServerRequest;
 
 import java.util.UUID;
 
+import static org.springframework.http.HttpStatus.NO_CONTENT;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
-@RequestMapping("/api/vi1/beer")
+@RequestMapping("/api/v1/beer")
 public class BeerController {
 
     @GetMapping("/{beerId}")
     public ResponseEntity<BeerDto> getBeer(@PathVariable UUID beerId) {
 
         //TODO: IMPL
-        return new ResponseEntity<>(BeerDto.builder().build(), OK);
+        return new ResponseEntity<>(BeerDto.builder().id(beerId).build(), OK);
     }
 
 
@@ -29,15 +29,16 @@ public class BeerController {
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
-    @PutMapping
-    public ResponseEntity  updateBeer(@PathVariable UUID uuid ,@RequestBody BeerDto beerDto){
+    @PutMapping("/{beerId}")
+    public ResponseEntity updateBeer(@PathVariable UUID beerId, @RequestBody BeerDto beerDto) {
 
         //TODO: IMPL
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
-    @DeleteMapping
-    public void deleteBeerByID(@PathVariable UUID uuid){
+    @DeleteMapping("/{beerId}")
+    @ResponseStatus(NO_CONTENT)
+    public void deleteBeerByID(@PathVariable UUID beerId) {
         //TODO: IMPL
     }
 
